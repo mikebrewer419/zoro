@@ -33,7 +33,7 @@ class ProductSpider(scrapy.Spider):
         zoro = response.css('span[data-za="PDPZoroNo"]::text').get().strip()
         mfr = response.css('span[data-za="PDPMfrNo"]::text').get().strip()
         brand = response.css('a[data-za="product-brand-name"]::text').get().strip()
-        category = response.css('ol.Breadcrumb li.Breadcrumb__list-item a.Breadcrumb__link span::text').getall()[-2]
+        category = ' / '.join(response.css('ol.Breadcrumb li.Breadcrumb__list-item a.Breadcrumb__link span::text').getall()[1:-1])
         price = response.css('span.product-price__price::attr(content)').get()
         description = response.css('div.description-container div::text').get().strip()
         yield {
