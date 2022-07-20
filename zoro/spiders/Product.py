@@ -24,7 +24,7 @@ class ProductSpider(scrapy.Spider):
        yield from response.follow_all(css='ul.c-sidebar-nav__list li.c-sidebar-nav__list-child a', callback=self.parse_sub_cat)
     
     def parse_sub_cat(self, response):
-        product_links = response.css('section.search-results div.product-card a.title::attr(href)')
+        product_links = response.css('section.search-results a.product-image::attr(href)')
         for link in product_links[0:10]:
             yield response.follow(link, callback=self.parse_product)
     
